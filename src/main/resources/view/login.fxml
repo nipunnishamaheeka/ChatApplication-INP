@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import java.net.URL?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.loginFromController">
+   <children>
+      <Pane prefHeight="42.0" prefWidth="470.0" styleClass="top_pane">
+         <children>
+            <Text layoutX="41.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chat Pro">
+               <font>
+                  <Font name="Arial Black" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <MFXTextField floatingText="User Name" layoutX="107.0" layoutY="258.0" minHeight="30.0" prefHeight="42.0" prefWidth="294.0" />
+      <MFXButton layoutX="211.0" layoutY="360.0" prefHeight="26.0" prefWidth="85.0" styleClass="function" stylesheets="@../style/button.css" text="Log In" />
+      <ImageView fitHeight="108.0" fitWidth="115.0" layoutX="200.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/man.png" />
+         </image></ImageView>
+   </children>
+   <stylesheets>
+      <URL value="@../style/background.css" />
+      <URL value="@../style/button.css" />
+   </stylesheets>
+</AnchorPane>
