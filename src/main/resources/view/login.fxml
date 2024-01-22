@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import java.net.URL?>
 <?import javafx.scene.image.Image?>
@@ -22,11 +23,12 @@
          </children>
       </Pane>
       <MFXTextField floatingText="User Name" layoutX="107.0" layoutY="258.0" minHeight="30.0" prefHeight="42.0" prefWidth="294.0" />
-      <MFXButton layoutX="211.0" layoutY="360.0" prefHeight="26.0" prefWidth="85.0" styleClass="function" stylesheets="@../style/button.css" text="Log In" />
+      <MFXButton fx:id="btnLogin" layoutX="211.0" layoutY="402.0" onAction="#btnLoginOnAction" prefHeight="26.0" prefWidth="85.0" styleClass="function" stylesheets="@../style/button.css" text="Log In" />
       <ImageView fitHeight="108.0" fitWidth="115.0" layoutX="200.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/man.png" />
          </image></ImageView>
+      <MFXPasswordField floatingText="Password" layoutX="107.0" layoutY="321.0" minHeight="30.0" prefHeight="42.0" prefWidth="294.0" />
    </children>
    <stylesheets>
       <URL value="@../style/background.css" />

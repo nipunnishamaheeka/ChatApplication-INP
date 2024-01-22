@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="background" xmlns:fx="http://javafx.com/javafx/21">
+    <children>
+        <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="250.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@your/path/to/logo.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="220.0" layoutY="150.0" styleClass="title" text="Chat Application" textAlignment="CENTER">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Label>
+        <TextField fx:id="" id="usernameField" layoutX="200.0" layoutY="200.0" prefHeight="40.0" prefWidth="200.0" promptText="Username" styleClass="text-field" />
+        <PasswordField fx:id="passwordField" layoutX="200.0" layoutY="250.0" prefHeight="40.0" prefWidth="200.0" promptText="Password" styleClass="text-field" />
+        <Button fx:id="loginButton" layoutX="200.0" layoutY="310.0" mnemonicParsing="false" onAction="#handleLogin" text="Login" styleClass="login-button" />
+        <Button fx:id="registerButton" layoutX="300.0" layoutY="310.0" mnemonicParsing="false" onAction="#handleRegister" text="Register" styleClass="register-button" />
+    </children>
+</AnchorPane>
