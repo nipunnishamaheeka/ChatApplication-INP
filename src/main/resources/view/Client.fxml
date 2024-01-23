@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -8,33 +10,307 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Main_Pane" prefHeight="396.0" prefWidth="478.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.Client">
+<AnchorPane fx:id="Main_Pane" prefHeight="484.0" prefWidth="754.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.Client">
     <children>
-        <ScrollPane fx:id="scrollPane" fitToWidth="true" layoutX="30" layoutY="70" prefHeight="256" prefWidth="418">
+        <ScrollPane fx:id="scrollPane" fitToWidth="true" layoutX="262.0" layoutY="48.0" prefHeight="329.0" prefWidth="494.0" styleClass="root" stylesheets="@../style/background.css">
             <content>
-                <VBox fx:id="vBoxMessages" prefHeight="248" prefWidth="412" />
+                <VBox fx:id="vBoxMessages" prefHeight="248.0" prefWidth="330.0" />
             </content>
         </ScrollPane>
 
-        <HBox layoutX="30" layoutY="338" spacing="5">
-            <TextField fx:id="textFld" prefHeight="26" prefWidth="320" />
-            <Button fx:id="sendButton" onMouseClicked="#btnSendOnAction" text="Send" />
-        </HBox>
-
-        <Label layoutX="114" layoutY="26" text="Client Interface">
-            <font>
-                <Font name="Arial Black" size="24" />
-            </font>
-        </Label>
-
-        <Button fx:id="addClient" layoutX="401.0" layoutY="32.0" mnemonicParsing="false" onAction="#btnAddClientOnAction" text="ADD" />
-      <ImageView fx:id="btnEmoji" fitHeight="26.0" fitWidth="31.0" layoutX="411.0" layoutY="338.0" onMouseClicked="#btnEmojiOnAction" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/attachment.png" />
-         </image>
-      </ImageView>
+        <HBox layoutX="267.0" layoutY="374.0" spacing="5" />
+      <Pane prefHeight="484.0" prefWidth="55.0" styleClass="dashboard_side_pane" stylesheets="@../style/background.css">
+         <children>
+            <Pane fx:id="btnlogout" layoutX="13.0" layoutY="440.0" prefHeight="30.0" prefWidth="35.0" styleClass="button_pane" stylesheets="@../style/button.css">
+               <children>
+                  <ImageView fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                     <image>
+                        <Image url="@../assets/logout.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Pane>
+            <Pane fx:id="btnlogout1" layoutX="13.0" layoutY="50.0" prefHeight="30.0" prefWidth="30.0" styleClass="button_pane" stylesheets="@../style/button.css">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="4.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/attach-file.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Pane>
+            <Pane fx:id="btnlogout11" layoutX="13.0" layoutY="90.0" prefHeight="30.0" prefWidth="30.0" styleClass="button_pane" stylesheets="@../style/button.css">
+               <children>
+                  <ImageView fitHeight="23.0" fitWidth="28.0" layoutX="4.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/setting.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane layoutX="261.0" layoutY="-3.0" prefHeight="50.0" prefWidth="494.0" styleClass="headLine_pane" stylesheets="@../style/background.css">
+         <children>
+      
+              <Label layoutX="22.0" layoutY="15.0" text="Client">
+                  <font>
+                      <Font name="Arial Bold" size="16.0" />
+                  </font>
+              </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="55.0" prefHeight="484.0" prefWidth="206.0" styleClass="dashboard_Middle_pane" stylesheets="@../style/background.css">
+         <children>
+            <HBox alignment="CENTER" layoutX="7.0" layoutY="14.0" prefHeight="30.0" prefWidth="188.0">
+               <children>
+                  <ImageView fitHeight="22.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                     <image>
+                        <Image url="@../assets/search%20(1).png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="8.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <TextField promptText="Search Here..." styleClass="transprent_pane">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </TextField>
+               </children>
+               <styleClass>
+                  <String fx:value="dark_gray" />
+                  <String fx:value="radius" />
+               </styleClass>
+            </HBox>
+            <VBox layoutY="73.0" prefHeight="412.0" prefWidth="206.0" spacing="6.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="206.0">
+                     <children>
+                        <ImageView fitHeight="45.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/user%20(1).png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="6.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <VBox alignment="CENTER_LEFT" prefHeight="68.0" prefWidth="152.0">
+                           <children>
+                              <Label text="Palitha" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label text="You : Thanks For You,therting us" textFill="#c4c0c0">
+                                 <font>
+                                    <Font name="Arial" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="6.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="206.0">
+                     <children>
+                        <ImageView fitHeight="45.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/user%20(1).png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="6.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <VBox alignment="CENTER_LEFT" prefHeight="68.0" prefWidth="152.0">
+                           <children>
+                              <Label text="Laknath" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label text="You : Thanks For You,therting us" textFill="#c4c0c0">
+                                 <font>
+                                    <Font name="Arial" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="6.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="206.0">
+                     <children>
+                        <ImageView fitHeight="45.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/user%20(1).png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="6.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <VBox alignment="CENTER_LEFT" prefHeight="68.0" prefWidth="152.0">
+                           <children>
+                              <Label text="Dhanu" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label text="You : Thanks For You,therting us" textFill="#c4c0c0">
+                                 <font>
+                                    <Font name="Arial" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="6.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="206.0">
+                     <children>
+                        <ImageView fitHeight="45.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/user%20(1).png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="6.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <VBox alignment="CENTER_LEFT" prefHeight="68.0" prefWidth="152.0">
+                           <children>
+                              <Label text="Ashan" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label text="You : Thanks For You,therting us" textFill="#c4c0c0">
+                                 <font>
+                                    <Font name="Arial" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="6.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="206.0">
+                     <children>
+                        <ImageView fitHeight="45.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/user%20(1).png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="6.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <VBox alignment="CENTER_LEFT" prefHeight="68.0" prefWidth="152.0">
+                           <children>
+                              <Label text="Tharindu" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label text="You : Thanks For You,therting us" textFill="#c4c0c0">
+                                 <font>
+                                    <Font name="Arial" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="6.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="206.0">
+                     <children>
+                        <ImageView fitHeight="45.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/user%20(1).png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="6.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <VBox alignment="CENTER_LEFT" prefHeight="68.0" prefWidth="152.0">
+                           <children>
+                              <Label text="Palitha" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label text="You : Thanks For You,therting us" textFill="#c4c0c0">
+                                 <font>
+                                    <Font name="Arial" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="6.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Pane layoutY="58.0" prefHeight="1.0" prefWidth="206.0" styleClass="dark_gray" />
+         </children>
+      </Pane>
+      <HBox alignment="CENTER_LEFT" layoutX="261.0" layoutY="439.0" prefHeight="44.0" prefWidth="494.0" spacing="6.0">
+         <children>
+            <ImageView fx:id="btnEmoji" fitHeight="28.0" fitWidth="23.0" onMouseClicked="#handleEmojiClick" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/happy.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="22.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/attach-paperclip-symbol.png" />
+               </image>
+            </ImageView>
+               <TextField fx:id="textFld" prefHeight="43.0" prefWidth="374.0" promptText="Type Something to Send..." style="-fx-background-color: tranprent;" />
+            <ImageView fx:id="btnSend" fitHeight="30.0" fitWidth="28.0" onMouseClicked="#btnSendOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/sent%20(2).png" />
+               </image>
+            </ImageView>
+         </children>
+         <padding>
+            <Insets left="15.0" />
+         </padding>
+      </HBox>
     </children>
 </AnchorPane>

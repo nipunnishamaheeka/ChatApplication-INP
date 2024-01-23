@@ -6,3 +6,33 @@
     -fx-background-color: linear-gradient( to right, rgb(186, 233, 250) 0%, rgb(113, 151, 255) 100%, rgba(224,233,244,1) 100%);
     -fx-effect: dropshadow(gaussian, #ffffff, 15, 0, 0, 0);
 }
+.dashboard_side_pane{
+    -fx-background-color: rgb(70, 71, 74);
+    -fx-fill:   rgba(224,233,244,1);
+    -fx-effect: dropshadow(gaussian, rgb(158, 166, 176), 15, 0, 0, 0);
+}
+.dashboard_Middle_pane{
+     -fx-background-color: rgb(99, 100, 103);
+     -fx-fill:   rgba(224,233,244,1);
+     -fx-effect: dropshadow(gaussian, rgba(158, 166, 176, 0), 15, 0, 0, 0);
+ }
+/* Add this to your CSS file */
+.root {
+    -fx-background-image: url('/assets/painted-leaf-texture.jpg');
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}
+.headLine_pane{
+    -fx-background-color: rgb(200, 200, 201);
+    -fx-fill:   rgba(224,233,244,1);
+}
+.transprent_pane{
+    -fx-background-color: rgba(0, 0, 0, 0);
+}
+.radius{
+    -fx-background-radius: 100px;
+}
+.dark_gray{
+    -fx-background-color: #46474A;
+}

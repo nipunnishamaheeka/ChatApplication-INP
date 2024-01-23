@@ -34,7 +34,8 @@ public class Server {
                 outputStreams.add(outputStream);
                 inputStreams.add(inputStream);
 
-                new Thread(() -> handleClientCommunication(clientSocket)).start();
+                new Thread(() -> handleClientCommunication(clientSocket,outputStream)).start();
+
             }
 
         } catch (IOException e) {
@@ -42,7 +43,7 @@ public class Server {
         }
     }
 
-    private void handleClientCommunication(Socket clientSocket) {
+    private void handleClientCommunication(Socket clientSocket,DataOutputStream dataOutputStream) {
         try {
             DataInputStream inputStream = new DataInputStream(clientSocket.getInputStream());
 
@@ -51,6 +52,7 @@ public class Server {
                 System.out.println("\nClient from " + clientSocket.getInetAddress() + " : " + message);
 
                 for (DataOutputStream outputStream : outputStreams) {
+                    if (outputStream.equals(dataOutputStream))continue;
                     try {
                         outputStream.writeUTF("Client from " + clientSocket.getInetAddress() + " : " + message.trim());
                         outputStream.flush();
@@ -60,7 +62,7 @@ public class Server {
                 }
             }
         } catch (IOException e) {
-            // Handle client disconnection or any other IOException
+            // Handle client disconnection
             System.out.println("Client disconnected from: " + clientSocket.getInetAddress());
             int index = clientSockets.indexOf(clientSocket);
             if (index != -1) {
