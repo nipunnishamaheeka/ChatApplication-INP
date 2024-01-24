@@ -16,10 +16,24 @@
 
 <AnchorPane fx:id="Main_Pane" prefHeight="484.0" prefWidth="754.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.Client">
     <children>
-        <ScrollPane fx:id="scrollPane" fitToWidth="true" layoutX="262.0" layoutY="48.0" prefHeight="329.0" prefWidth="494.0" styleClass="root" stylesheets="@../style/background.css">
+        <ScrollPane fx:id="scrollPane" fitToWidth="true" layoutX="262.0" layoutY="47.0" prefHeight="397.0" prefWidth="494.0" stylesheets="@../style/Scrool.css">
             <content>
-                <VBox fx:id="vBoxMessages" prefHeight="248.0" prefWidth="330.0" />
+                <VBox fx:id="vBoxMessages" prefHeight="390.0" prefWidth="488.0" />
             </content>
+         <styleClass>
+            <String fx:value="bar" />
+            <String fx:value="content" />
+            <String fx:value="corner" />
+            <String fx:value="decrement-arrow" />
+            <String fx:value="decrement-button" />
+            <String fx:value="increment-arrow" />
+            <String fx:value="increment-button" />
+            <String fx:value="scroll-bar" />
+            <String fx:value="thumb" />
+            <String fx:value="track" />
+            <String fx:value="txt-w" />
+            <String fx:value="vbox" />
+         </styleClass>
         </ScrollPane>
 
         <HBox layoutX="267.0" layoutY="374.0" spacing="5" />

@@ -94,20 +94,23 @@ public class Client {
             if (sender.equals("Me")) {
                 // If the sender is the client, align to the right
                 messageBox.setAlignment(Pos.CENTER_RIGHT);
-                messageBox.setPadding(new Insets(5, 10, 5, 5));
+                messageBox.setPadding(new Insets(5, 5, 5, 10));
 
                 textFlow = createTextFlow("Me: " + message);
-                textFlow.setStyle("-fx-font-size: 15px");
+                textFlow.setStyle("-fx-font-size: 12px");
                 textFlow.setStyle("-fx-color:rgb(239,242,255);"
-                        + "-fx-background-color: rgb(15,125,242);"
-                        + "-fx-background-radius: 20px");
+                        + "-fx-background-color: rgb(30,129,246);"
+                        + "-fx-background-radius: 10px");
             } else {
                 // If the sender is another client, align to the left
                 messageBox.setAlignment(Pos.CENTER_LEFT);
                 messageBox.setPadding(new Insets(5, 5, 5, 10));
 
                 textFlow = createTextFlow(sender + ": " + message);
-                textFlow.setStyle("-fx-font-size: 15px");
+                textFlow.setStyle("-fx-font-size: 12px");
+                textFlow.setStyle("-fx-color:rgb(239,242,255);"
+                        + "-fx-background-color: rgb(189,193,199);"
+                        + "-fx-background-radius: 10px");
             }
 
             messageBox.getChildren().add(textFlow);
