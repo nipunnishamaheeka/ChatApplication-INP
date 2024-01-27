@@ -55,5 +55,15 @@
         <version>1.18.26</version>
         <scope>provided</scope>
     </dependency>
+    <dependency>
+        <groupId>io.github.typhon0</groupId>
+        <artifactId>AnimateFX</artifactId>
+        <version>1.2.0</version>
+    </dependency>
+    <dependency>
+        <groupId>com.gluonhq</groupId>
+        <artifactId>emoji</artifactId>
+        <version>1.0.1</version>
+    </dependency>
 </dependencies>
 </project>

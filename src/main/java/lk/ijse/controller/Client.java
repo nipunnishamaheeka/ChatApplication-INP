@@ -1,20 +1,23 @@
 package lk.ijse.controller;
 
+import com.gluonhq.emoji.Emoji;
+import com.gluonhq.emoji.EmojiData;
+import com.gluonhq.emoji.util.TextUtils;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -22,10 +25,10 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
+import java.util.List;
+import java.util.Optional;
 
 public class Client {
 
@@ -34,9 +37,16 @@ public class Client {
     public ScrollPane scrollPane;
     public VBox vBoxMessages;
     public ImageView btnSend;
+    public Label lblClientName;
+    public GridPane emojiGridPane;
+    public ImageView btnEmoji;
     private String message = "";
     private Socket remoteSocket;
     private DataOutputStream dataOutputStream;
+    ObjectOutputStream oos = null;
+    ObjectInputStream ois = null;
+    Socket socket = null;
+    java.util.Date date = null;
 
     public void initialize() {
         try {
@@ -44,6 +54,7 @@ public class Client {
             dataOutputStream = new DataOutputStream(remoteSocket.getOutputStream());
             System.out.println("Connected to server");
             dataOutputStream.writeUTF("Hello!");
+
 
             DataInputStream inputStream = new DataInputStream(remoteSocket.getInputStream());
 
@@ -70,6 +81,10 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setUsername(String username) {
+        lblClientName.setText(username);
     }
 
     public void btnSendOnAction(MouseEvent event) {
@@ -135,8 +150,31 @@ public class Client {
     // Handle emoji clicks
     @FXML
     void handleEmojiClick(MouseEvent mouseEvent) {
-        String emoji = "\uD83D\uDE42"; // Replace with the appropriate emoji
-        sendEmoji(emoji);
+
+            //Clear the grid
+            emojiGridPane.getChildren().clear();
+
+            String text = "grinning grin joy smile smiling_face_with_tear sunglasses middle_finger pinched_fingers wave";
+            String[] words = text.split(" ");
+
+
+            List<Node> nodes = TextUtils.convertToTextAndImageNodes(createUnicodeText(text));
+
+            for (int i = 0; i < nodes.size(); i++) {
+                Node node = nodes.get(i);
+                MFXButton btn = new MFXButton(words[i],node);
+                btn.setPrefHeight(27);
+                btn.setPrefWidth(27);
+                btn.setOnMouseClicked(event -> {
+                    sendEmoji(btn.getText());
+                });
+                btn.setEllipsisString("");
+                emojiGridPane.add(btn, i % 3, i / 3);
+                GridPane.setHalignment(btn, javafx.geometry.HPos.CENTER);
+                GridPane.setValignment(btn,javafx.geometry.VPos.CENTER);
+
+
+        }
     }
 
     private void sendEmoji(String emoji) {
@@ -173,11 +211,46 @@ public class Client {
             System.exit(0);
         }
     }
+    private String createUnicodeText(String nv) {
+        StringBuilder unicodeText = new StringBuilder();
+        String[] words = nv.split(" ");
+        for (String word : words) {
+            Optional<Emoji> optionalEmoji = EmojiData.emojiFromShortName(word);
+            if (optionalEmoji.isPresent()){
+                unicodeText.append(optionalEmoji.get().character());
+            }
+        }
+        return unicodeText.toString();
+    }
+    public void btnAttachmentOnAction(MouseEvent event) {
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(remoteSocket.getOutputStream());
+            ObjectInputStream ois = new ObjectInputStream(remoteSocket.getInputStream());
 
-    public void btnAddClientOnAction(javafx.event.ActionEvent actionEvent) throws IOException {
-        Stage stage2 = new Stage();
-        stage2.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/Client.fxml"))));
-        stage2.setTitle("Client");
-        stage2.show();
+            oos.flush();
+            oos.writeObject(new String("Desert.jpg"));
+
+            oos.flush();
+            oos.reset();
+            int sz = (Integer) ois.readObject();
+            System.out.println("Receiving " + (sz / 1024) + " Bytes From Server");
+
+            byte[] b = new byte[sz];
+            int bytesRead = ois.read(b, 0, b.length);
+            for (int i = 0; i < sz; i++) {
+                System.out.print(b[i]);
+            }
+            FileOutputStream fos = new FileOutputStream(new File("demo.jpg"));
+            fos.write(b, 0, b.length);
+            System.out.println("From Server: " + ois.readObject());
+
+            fos.close();
+            oos.close();
+            ois.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 }
+
