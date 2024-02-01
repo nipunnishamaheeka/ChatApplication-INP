@@ -9,6 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -31,6 +33,16 @@ public class loginFromController {
             alert.setHeaderText("Warning");
             alert.setContentText("Username must have exactly 3 characters.");
             alert.showAndWait();
+            txtUsername.addEventFilter(KeyEvent.KEY_PRESSED, Revent -> {
+                if (Revent.getCode() == KeyCode.ENTER) {
+                    Revent.consume(); // Consume the event to prevent a new line in the text field
+                    try {
+                        btnLoginOnAction(null); // Call the send action method
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
             return; // Exit the method if validation fails
         }
 
@@ -46,8 +58,8 @@ public class loginFromController {
         // If validation passes, open the client stage
         openClientStage(userName);
     }
-
-
+//
+//
     private void openClientStage(String username) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Client.fxml"));
         Parent root = loader.load();
@@ -62,6 +74,18 @@ public class loginFromController {
         stage2.show();
     }
 
-
+//    private void openClientStage(String username) throws IOException {
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Client.fxml"));
+//        Parent root = loader.load();
+//
+////        // Access the controller and call a method to set the username
+////        ChatFormController clientController = loader.getController();
+////        clientController.setUsername(username);
+//
+//        Stage stage2 = new Stage();
+//        stage2.setScene(new Scene(root));
+//        stage2.setTitle("Client");
+//        stage2.show();
+//    }
 
 }

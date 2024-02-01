@@ -52,7 +52,7 @@ public class Server {
                 for (DataOutputStream outputStream : outputStreams) {
                     if (outputStream.equals(dataOutputStream))continue;
                     try {
-                        outputStream.writeUTF("Client from " + clientSocket.getInetAddress() + " : " + message.trim());
+                        outputStream.writeUTF(message);
                         outputStream.flush();
                     } catch (IOException e) {
                         e.printStackTrace();

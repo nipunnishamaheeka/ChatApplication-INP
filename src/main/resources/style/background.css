@@ -23,8 +23,18 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: center center;
 }
+.Chatroot {
+    -fx-background-image: url('/assets/eer.jpg');
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}
 .headLine_pane{
     -fx-background-color: rgb(200, 200, 201);
+    -fx-fill:   rgba(224,233,244,1);
+}
+.text_pane{
+    -fx-background-color: rgb(134, 134, 134);
     -fx-fill:   rgba(224,233,244,1);
 }
 .transprent_pane{
