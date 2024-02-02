@@ -26,7 +26,7 @@
          <image>
             <Image url="@../assets/man.png" />
          </image></ImageView>
-      <MFXTextField fx:id="txtUsername" floatingText="UserName" layoutX="107.0" layoutY="311.0" prefHeight="50.0" prefWidth="294.0" />
+      <MFXTextField fx:id="txtUsername" floatingText="UserName" layoutX="107.0" layoutY="311.0" onAction="#btnLoginOnAction" prefHeight="50.0" prefWidth="294.0" />
    </children>
    <stylesheets>
       <URL value="@../style/background.css" />

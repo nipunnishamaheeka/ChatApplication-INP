@@ -10,6 +10,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -28,11 +32,17 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
+import javafx.embed.swing.SwingFXUtils;
+import java.util.Base64;
+import java.awt.image.BufferedImage;
 
 public class Client {
 
@@ -117,6 +127,7 @@ public class Client {
                 case "img":
                     //receivedName(sender);
                     receiveImage(content);
+                    //convertStringToImage(content);
                     break;
                 default:
                     System.out.println("Unknown message type: " + messageType);
@@ -231,10 +242,13 @@ public class Client {
             dataOutputStream.flush();
 
             List<Node> nodes = TextUtils.convertToTextAndImageNodes(createUnicodeText(text));
+            Node node = nodes.get(0);
+            node.setScaleX(1.5);
+            node.setScaleY(1.5);
             HBox hBox = new HBox();
             hBox.setPadding(new Insets(5, 5, 5, 10));
             hBox.setAlignment(Pos.BASELINE_RIGHT);
-            hBox.getChildren().add(nodes.get(0));
+            hBox.getChildren().add(node);
             vBoxMessages.getChildren().add(hBox);
         } catch (IOException e) {
             e.printStackTrace();
@@ -243,10 +257,13 @@ public class Client {
     private void receiveEmoji(String content) {
         Platform.runLater(() -> {
             List < Node > nodes = TextUtils.convertToTextAndImageNodes(createUnicodeText(content));
+            Node node = nodes.get(0);
+            node.setScaleX(1.5);
+            node.setScaleY(1.5);
             HBox hBox = new HBox();
             hBox.setPadding(new Insets(5, 5, 5, 10));
             hBox.setAlignment(Pos.BASELINE_LEFT);
-            hBox.getChildren().add(nodes.get(0));
+            hBox.getChildren().add(node);
             vBoxMessages.getChildren().add(hBox);
         });
     }
@@ -270,60 +287,127 @@ public class Client {
     @FXML
     void btnAttachmentOnAction(MouseEvent event) {
 
+//        FileChooser fileChooser = new FileChooser();
+//        configureFileChooser(fileChooser);
+//
+//        Window window = ((Node) event.getTarget()).getScene().getWindow();
+//        File file = fileChooser.showOpenDialog(window);
+//
+//
+//        if (file != null) {
+//            sendImage(file.toURI().toString());
+//        }
         FileChooser fileChooser = new FileChooser();
-        configureFileChooser(fileChooser);
-
-        Window window = ((Node) event.getTarget()).getScene().getWindow();
-        File file = fileChooser.showOpenDialog(window);
-
-
-        if (file != null) {
-            sendImage(file.toURI().toString());
-        }
-
-    }
-
-    private void sendImage(String absolutePath) {
-        Image image = new Image(absolutePath);
-        ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(200);
-        imageView.setFitWidth(200);
-
-        HBox hBox = new HBox();
-        hBox.setPadding(new Insets(5, 5, 5, 10));
-        hBox.getChildren().add(imageView);
-        hBox.setAlignment(Pos.CENTER_RIGHT);
-
-        vBoxMessages.getChildren().add(hBox);
-
-        try {
-            dataOutputStream.writeUTF("img&" + "&" + absolutePath);
-            dataOutputStream.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-    private void receiveImage(String path) {
-        Image image = new Image(path);
-        ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(200);
-        imageView.setFitWidth(200);
-        HBox hBox = new HBox();
-        hBox.setAlignment(Pos.BASELINE_LEFT);
-        hBox.setPadding(new Insets(5, 5, 5, 10));
-        hBox.getChildren().add(imageView);
-
-        Platform.runLater(() -> {
-            vBoxMessages.getChildren().add(hBox);
-        });
-    }
-    private void configureFileChooser(FileChooser fileChooser) {
         fileChooser.setTitle("Select Image File");
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif", "*.jpeg")
-        );
+        FileChooser.ExtensionFilter imageFilter =
+                new FileChooser.ExtensionFilter("Image Files", "*.jpg",
+                        "*.jpeg", "*.png", "*.gif");
+        fileChooser.getExtensionFilters().add(imageFilter);
+        File file =
+                fileChooser.showOpenDialog(textFld.getScene().getWindow());
+        if (file != null) {
+            try {
+                ImageView imageView = new
+                        ImageView(file.toURI().toString());
+                imageView.setFitWidth(100);
+                imageView.setFitHeight(100);
+                HBox hBox = new HBox(12, imageView);
+                hBox.setAlignment(Pos.CENTER_RIGHT);
+                vBoxMessages.setAlignment(Pos.TOP_LEFT);
+                Platform.runLater(() ->
+                        vBoxMessages.getChildren().add(hBox));
+                String imgText =
+                        convertImageToString(imageView.getImage());
+                dataOutputStream.writeUTF("img&" + "&" +imgText);
+                dataOutputStream.flush();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+
     }
+    private String convertImageToString(Image image) throws
+            IOException {
+        double maxWidth = 600;
+        double maxHeight = 400;
+        double width = image.getWidth();
+        double height = image.getHeight();
+        if (width > maxWidth || height > maxHeight) {
+            double scaleFactor = Math.min(maxWidth / width, maxHeight /
+                    height);
+            width *= scaleFactor;
+            height *= scaleFactor;
+        }
+        BufferedImage resizedImage = new BufferedImage((int) width,
+                (int) height, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = resizedImage.createGraphics();
+        g.drawImage(SwingFXUtils.fromFXImage(image, null), 0, 0, (int)
+                width, (int) height, null);
+        g.dispose();
+        ByteArrayOutputStream outputStream = new
+                ByteArrayOutputStream();
+        ImageIO.write(resizedImage, "jpg", outputStream);
+        byte[] imageBytes = outputStream.toByteArray();
+        return Base64.getEncoder().encodeToString(imageBytes);
+    }
+
+//
+//    private void sendImage(String absolutePath) {
+//        Image image = new Image(absolutePath);
+//        ImageView imageView = new ImageView(image);
+//        imageView.setFitHeight(200);
+//        imageView.setFitWidth(200);
+//
+//        HBox hBox = new HBox();
+//        hBox.setPadding(new Insets(5, 5, 5, 10));
+//        hBox.getChildren().add(imageView);
+//        hBox.setAlignment(Pos.CENTER_RIGHT);
+//
+//        vBoxMessages.getChildren().add(hBox);
+//
+//        try {
+//            dataOutputStream.writeUTF("img&" + "&" + absolutePath);
+//            dataOutputStream.flush();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
+private  Image convertStringToImage(String imageAsString) {
+        byte[] imageBytes = Base64.getDecoder().decode(imageAsString);
+        ByteArrayInputStream inputStream = new
+                ByteArrayInputStream(imageBytes);
+        return new Image(inputStream);
+    }
+
+    private void receiveImage(String path) {
+//        Image image = new Image(path);
+//        ImageView imageView = new ImageView(image);
+//        imageView.setFitHeight(200);
+//        imageView.setFitWidth(200);
+//        HBox hBox = new HBox();
+//        hBox.setAlignment(Pos.BASELINE_LEFT);
+//        hBox.setPadding(new Insets(5, 5, 5, 10));
+//        hBox.getChildren().add(imageView);
+//
+//        Platform.runLater(() -> {
+//            vBoxMessages.getChildren().add(hBox);
+//        });
+        Image image = convertStringToImage(path);
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(100);
+        imageView.setFitHeight(100);
+        Label label = new Label();
+        HBox hBox = new HBox(12, label,imageView);
+        Platform.runLater(() -> vBoxMessages.getChildren().addAll(hBox));
+    }
+
+//    private void configureFileChooser(FileChooser fileChooser) {
+//        fileChooser.setTitle("Select Image File");
+//        fileChooser.getExtensionFilters().addAll(
+//                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif", "*.jpeg")
+//        );
+//    }
 
     public void btnLogoutOnAction(MouseEvent event) {
         closeWindow();
