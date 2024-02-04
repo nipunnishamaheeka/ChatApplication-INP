@@ -5,11 +5,12 @@
 .function{
     -fx-border-radius: 10;
     -fx-background-radius: 10;
-    -fx-background: rgb(216,210,252);
+    -fx-background-color: #254fd2;
 }
 .function:hover{
-    -fx-background-color: Transparent;
-    -fx-border-color: Transparent;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-border-color: #254fd2;
     -fx-shadow-color: #FDE2E0FF;
     -fx-effect: dropshadow(gaussian, #6586A3, 15, 0, 0, 0);
 }

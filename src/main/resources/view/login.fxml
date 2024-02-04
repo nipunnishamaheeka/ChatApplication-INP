@@ -1,32 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
-<?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="600.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.loginFromController">
    <children>
-      <Pane prefHeight="42.0" prefWidth="470.0" styleClass="top_pane">
-         <children>
-            <Text layoutX="41.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chat Pro">
-               <font>
-                  <Font name="Arial Black" size="18.0" />
-               </font>
-            </Text>
-         </children>
-      </Pane>
-      <MFXButton fx:id="btnLogin" layoutX="211.0" layoutY="429.0" onAction="#btnLoginOnAction" prefHeight="26.0" prefWidth="85.0" styleClass="function" stylesheets="@../style/button.css" text="Log In" />
-      <ImageView fitHeight="108.0" fitWidth="115.0" layoutX="200.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
+      <TextField fx:id="txtUserName" layoutX="87.0" layoutY="338.0" onAction="#btnLoginOnAction" prefHeight="42.0" prefWidth="294.0" promptText="UserName" />
+      <ImageView fitHeight="94.0" fitWidth="93.0" layoutX="188.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/man.png" />
-         </image></ImageView>
-      <MFXTextField fx:id="txtUsername" floatingText="UserName" layoutX="107.0" layoutY="311.0" onAction="#btnLoginOnAction" prefHeight="50.0" prefWidth="294.0" />
+            <Image url="@../assets/chat-box.png" />
+         </image>
+      </ImageView>
+      <MFXButton fx:id="btnLogin1" layoutX="140.0" layoutY="432.0" onAction="#btnLoginOnAction" prefHeight="35.0" prefWidth="190.0" styleClass="function" stylesheets="@../style/button.css" text="Start" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+      </MFXButton>
+      <Label layoutX="87.0" layoutY="232.0" text="Let's Get">
+         <font>
+            <Font name="Arial Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="87.0" layoutY="262.0" text="Started">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="87.0" layoutY="292.0" text="Connect with each other with chatting or calling. " />
+      <Label layoutX="87.0" layoutY="305.0" text="Enjoy and safe and private texting" />
+      <Label fx:id="error" layoutX="87.0" layoutY="389.0" text="Lb" textFill="RED" visible="false" />
    </children>
    <stylesheets>
       <URL value="@../style/background.css" />

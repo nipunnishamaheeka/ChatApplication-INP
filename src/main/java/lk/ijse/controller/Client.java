@@ -91,7 +91,7 @@ public class Client {
     private void socketInitialize() {
 
         try {
-            remoteSocket = new Socket("localhost", 3100);
+            remoteSocket = new Socket("localHost", 3100);
             dataOutputStream = new DataOutputStream(remoteSocket.getOutputStream());
             System.out.println("Connected to server");
             //dataOutputStream.writeUTF("Hello!");
@@ -393,6 +393,10 @@ private  Image convertStringToImage(String imageAsString) {
 //        Platform.runLater(() -> {
 //            vBoxMessages.getChildren().add(hBox);
 //        });
+//            String modifiedMessage =
+//                    message.substring(message.indexOf("-")+1);
+//            String removedMessage = message.substring(0,
+//                    message.indexOf("-"));
         Image image = convertStringToImage(path);
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(100);

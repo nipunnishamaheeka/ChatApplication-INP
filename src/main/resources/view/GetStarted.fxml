@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="navigationPane" prefHeight="600.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.getStart">
+   <children>
+      <ImageView fitHeight="94.0" fitWidth="93.0" layoutX="188.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/chat-box.png" />
+         </image></ImageView>
+      <Label layoutX="189.0" layoutY="287.0" text="WelCome">
+         <font>
+            <Font name="Arial Black" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="151.0" layoutY="326.0" text="Chat-Pro is  the best messaging" />
+      <Label layoutX="185.0" layoutY="337.0" text=" App on the planet" />
+      <MFXButton fx:id="btnLogin1" layoutX="140.0" layoutY="432.0" onAction="#btnstartOnAction" prefHeight="35.0" prefWidth="190.0" styleClass="function" stylesheets="@../style/button.css" text="Get Started" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+      </MFXButton>
+   </children>
+</AnchorPane>

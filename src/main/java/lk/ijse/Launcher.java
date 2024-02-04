@@ -19,7 +19,7 @@ public class Launcher extends Application {
 
         // Create and configure the second stage
         Stage stage2 = new Stage();
-        stage2.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/login.fxml"))));
+        stage2.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/GetStarted.fxml"))));
         stage2.setTitle("Client");
 
         // Set the positions for the stages
